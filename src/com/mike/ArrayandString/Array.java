@@ -23,7 +23,7 @@ public class Array {
                 wordCount++;
             }
             if(wordCount!=1){
-                
+
             }
             String s = sb.toString().replaceAll("\\s","");
             //System.out.println(s.length());
