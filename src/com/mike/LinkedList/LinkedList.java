@@ -72,7 +72,6 @@ public class LinkedList {
         tail=node;
 
     }
-    enum State{Visted,UnVisited, Visting}
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
         for(int i =1; i<11;i++){
