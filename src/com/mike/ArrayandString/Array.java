@@ -33,7 +33,6 @@ public class Array {
             System.out.println("rem:"+rem);
             charCount=0;
 
-
             //System.out.println(sb.toString().trim());
             w.add(sb.toString());
             sb.setLength(0);
