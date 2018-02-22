@@ -10,6 +10,23 @@ package com.mike.LinkedList;
  * }
  */
 class Solution {
+
+    static ListNode removeGreaterNodes(ListNode listHead, int x) {
+        ListNode curr= listHead;
+        ListNode prev= listHead;
+
+        while(curr!=null){
+            if(curr.val>x)
+                prev.next=curr.next;
+            else{
+                prev=curr;
+            }
+            curr=curr.next;
+        }
+        return (listHead.val>x)? listHead.next:listHead;
+
+    }
+
     public static int getSize(ListNode l){
 
         int count = 0;
