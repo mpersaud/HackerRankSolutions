@@ -6,46 +6,63 @@ import java.util.List;
 public class Array {
 
     static String[] textJustification(String[] words, int l) {
-        //This    is    an
-        List<String> w = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-        int wordCount = 0;
-        int charCount = 0;
-        int idx = 0;
-
-        while (idx <words.length){
-            while (idx< words.length && charCount+ words[idx].length()+1 <= l ) {
-                List<String> tokens = new ArrayList<>();
+        List<String> lines = new ArrayList<>();
+        List<String > tokens = new ArrayList<>();
+        int idx =0;
+        int wordSize=0;
+        while (idx < words.length) {
+            while (idx <words.length && wordSize + words[idx].length() < l) {
+                wordSize += words[idx].length() + 1;
                 tokens.add(words[idx]);
-                sb.append(words[idx]+" ");
                 idx++;
-                charCount = sb.length();
-                wordCount++;
             }
-            if(wordCount!=1){
+            int spaceSize = l -(wordSize - tokens.size());
+            int n = tokens.size() -1;
+            StringBuilder sb = new StringBuilder();
+            if(tokens.size()==1) {
 
+                sb.append(tokens.remove(0));
+                while(sb.length()!=l){
+                    sb.append(" ");
+                }
+                lines.add(sb.toString());
+                tokens.clear();
+                wordSize = 0;
+                sb.setLength(0);
+
+            }else {
+                int spaceInterval = spaceSize / n;
+                int rem = spaceSize % n;
+
+                for (String s : tokens) {
+                    sb.append(s);
+                    for (int i = 0; i < spaceInterval; i++) {
+                        sb.append(" ");
+                    }
+                    if (rem != 0) {
+                        sb.append(" ");
+                        rem--;
+                    }
+                }
+                lines.add(sb.toString().trim());
+                tokens.clear();
+                wordSize = 0;
+                sb.setLength(0);
             }
-            String s = sb.toString().replaceAll("\\s","");
-            //System.out.println(s.length());
-            int space = (l-s.length())/(wordCount-1);
-            int rem = (l-s.length())%(wordCount-1);
-            System.out.println(space);
-            System.out.println("rem:"+rem);
-            charCount=0;
 
-            //System.out.println(sb.toString().trim());
-            w.add(sb.toString());
-            sb.setLength(0);
         }
-
-
-        return words;
+        for(String str : lines){
+            System.out.println(str);
+            System.out.println(str.length());
+        }
+        return lines.toArray(new String[0]);
     }
 
     public static void main(String[] args) {
 
         String [] arr = {"This", "is", "an", "example", "of", "text", "justification."};
-        textJustification(arr,16);
+        String [] a=textJustification(arr,16);
+
     }
 
 }
